@@ -1,0 +1,41 @@
+# Copia a .github/workflows/pages.yml cuando el token tenga scope "workflow".
+# Mientras tanto el sitio se publica desde la rama gh-pages.
+name: Deploy GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: vendor/board/package-lock.json
+      - name: Build self-hosted static board
+        working-directory: vendor/board
+        run: |
+          npm ci
+          BOARD_SELF_HOSTED=true npx vite build --base /dani-ia-tactica/
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: vendor/board/dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

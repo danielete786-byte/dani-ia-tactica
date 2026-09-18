@@ -1,0 +1,198 @@
+/* Independent DanIA identity. The editor and its touch layout remain Board's. */
+:root {
+  --action: #8c6417;
+  --blue: #8c6417;
+  --bg: #faf9f5;
+  --settings-bg: #f5f3ec;
+  --bar: #f5f3ec;
+  --panel: #f5f3ec;
+  --track: #eae7dc;
+  --line: #d8d3c7;
+  --board-3d-space: #e9e7dd;
+}
+html[data-theme-resolved="dark"] {
+  --action: #dfbb71;
+  --blue: #dfbb71;
+  --bg: #141813;
+  --settings-bg: #171c16;
+  --bar: #20261e;
+  --panel: #20261e;
+  --track: #30382c;
+  --line: #434c3b;
+  --board-3d-space: #1b2119;
+}
+.site-header[hidden] { display: none !important; }
+.dania-brandbar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  padding: 8px max(18px, env(safe-area-inset-right)) 8px max(18px, env(safe-area-inset-left));
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+}
+.dania-brand { display: flex; align-items: center; gap: 9px; min-width: 0; }
+.dania-brand img { width: 28px; height: 28px; border-radius: 8px; }
+.dania-brand strong { font-size: 15px; letter-spacing: -.035em; white-space: nowrap; }
+.dania-brand small { margin-left: 8px; color: var(--ink-soft); font-size: 11px; }
+.dania-storage { color: var(--ink-soft); font-size: 11px; text-align: right; }
+.dania-storage span { color: var(--action); }
+.dania-session-open,
+.dania-tasks > summary {
+  min-height: 36px; padding: 8px 11px; border: 1px solid var(--action);
+  border-radius: 9px; color: var(--action); font-size: 12px; font-weight: 650;
+  cursor: pointer; white-space: nowrap; line-height: 18px; background: transparent;
+}
+.dania-session-open { flex: 0 0 auto; margin-left: auto; background: var(--action); color: var(--bg); }
+.dania-tasks { position: relative; flex: 0 0 auto; margin-left: 0; }
+.dania-tasks > summary {
+  list-style: none;
+}
+.dania-tasks > summary::-webkit-details-marker { display: none; }
+.dania-session-open:focus-visible,
+.dania-tasks > summary:focus-visible,
+.dania-task-menu button:focus-visible { outline: 3px solid var(--action); outline-offset: 3px; }
+.dania-task-menu {
+  position: absolute; right: 0; top: calc(100% + 9px); z-index: 180;
+  width: min(350px, calc(100vw - 32px)); max-height: min(70vh, 460px); overflow-y: auto;
+  padding: 14px; border: 1px solid var(--line); border-radius: 13px;
+  background: var(--bg); color: var(--ink); box-shadow: 0 12px 35px #0002;
+}
+.dania-task-heading { margin: 0 0 10px; color: var(--action); font-size: 12px; font-weight: 700; }
+.dania-task-group + .dania-task-group { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+.dania-task-group .dania-task-help { margin: 6px 2px 0; }
+.dania-task-menu button {
+  display: block; width: 100%; min-height: 62px; padding: 12px; margin: 0 0 8px;
+  border: 1px solid var(--line); border-radius: 9px; text-align: left;
+  background: var(--panel); color: var(--ink); cursor: pointer; white-space: normal;
+}
+.dania-task-menu button:hover { border-color: var(--action); }
+.dania-task-menu button strong { display: block; font-size: 14px; font-weight: 650; }
+.dania-task-menu button span { display: block; margin-top: 5px; color: var(--ink-soft); font-size: 12px; }
+.dania-task-help { margin: 12px 0 0; color: var(--ink-soft); font-size: 12px; line-height: 1.55; }
+
+/* Session planner: a working surface over the board, with the same warm neutral
+   palette and enough room for the coach to edit long instructions on mobile. */
+.dania-session-modal {
+  position: fixed; inset: 0; z-index: 500; display: flex; align-items: center; justify-content: center;
+  padding: 12px; background: rgba(17, 24, 19, .58); backdrop-filter: blur(5px);
+}
+.dania-session-modal[hidden] { display: none; }
+.dania-session-shell {
+  display: flex; flex-direction: column; width: min(1180px, 100%); height: min(940px, calc(100dvh - 24px));
+  overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--bg); color: var(--ink);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, .3);
+}
+.dania-session-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 18px 20px 14px; border-bottom: 1px solid var(--line); background: var(--bg);
+}
+.dania-session-header p,
+.dania-session-card-title p,
+.dania-session-list-title p { margin: 0 0 3px; color: var(--action); font-size: 10px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.dania-session-header h2 { margin: 0; font-size: 21px; letter-spacing: -.035em; }
+.dania-session-close {
+  width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 50%;
+  background: var(--panel); color: var(--ink); font-size: 26px; line-height: 32px; cursor: pointer;
+}
+.dania-session-controls,
+.dania-session-actions {
+  display: flex; align-items: end; gap: 8px; padding: 10px 20px; border-bottom: 1px solid var(--line); background: var(--panel);
+}
+.dania-session-controls label { flex: 1 1 320px; display: grid; gap: 4px; }
+.dania-session-controls label span { color: var(--ink-soft); font-size: 10px; font-weight: 750; text-transform: uppercase; }
+.dania-session-controls select,
+.dania-session-controls button,
+.dania-session-actions button,
+.dania-session-list-title button,
+.dania-session-task-tools button,
+.dania-open-diagram {
+  min-height: 36px; border: 1px solid var(--line); border-radius: 9px; background: var(--bg); color: var(--ink);
+  font: inherit; font-size: 12px; font-weight: 700; cursor: pointer;
+}
+.dania-session-controls select { width: 100%; padding: 7px 10px; }
+.dania-session-controls button,
+.dania-session-actions button { padding: 7px 11px; }
+.dania-session-controls button.danger { color: #b42318; }
+.dania-session-actions { align-items: center; justify-content: flex-end; background: var(--bg); }
+.dania-session-actions span { margin-right: auto; color: var(--ink-soft); font-size: 11px; }
+.dania-session-actions button.primary { border-color: var(--action); background: var(--action); color: var(--bg); }
+.dania-session-content { flex: 1 1 auto; overflow: auto; padding: 18px; overscroll-behavior: contain; }
+.dania-session-card,
+.dania-session-task {
+  border: 1px solid var(--line); border-radius: 14px; background: var(--bg); box-shadow: 0 5px 18px rgba(22, 32, 24, .055);
+}
+.dania-session-card { padding: 18px; }
+.dania-session-card-title,
+.dania-session-list-title,
+.dania-session-task-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.dania-session-card-title h3,
+.dania-session-list-title h3 { margin: 0; font-size: 18px; letter-spacing: -.025em; }
+.dania-session-card-title > span { color: var(--action); font-size: 12px; font-weight: 750; }
+.dania-session-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px 15px; margin-top: 18px; }
+.dania-session-field { display: grid; align-content: start; gap: 6px; min-width: 0; }
+.dania-session-field.wide { grid-column: 1 / -1; }
+.dania-session-field > span { color: var(--ink-soft); font-size: 10px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.dania-session-field input,
+.dania-session-field textarea {
+  width: 100%; min-height: 40px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 9px;
+  background: var(--panel); color: var(--ink); font: inherit; font-size: 13px; line-height: 1.45; resize: vertical;
+}
+.dania-session-field input:focus,
+.dania-session-field textarea:focus,
+.dania-session-controls select:focus { outline: 2px solid var(--action); outline-offset: 1px; border-color: var(--action); }
+.dania-session-task-list { margin-top: 24px; }
+.dania-session-list-title { margin: 0 2px 12px; }
+.dania-session-list-title button { padding: 7px 12px; border-color: var(--action); color: var(--action); }
+.dania-session-task { padding: 15px; margin-bottom: 14px; }
+.dania-session-task-head > div:first-child { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.dania-session-task-head > div:first-child > span {
+  display: grid; place-items: center; flex: 0 0 32px; height: 32px; border-radius: 9px;
+  background: var(--action); color: var(--bg); font-weight: 800;
+}
+.dania-session-task-head strong { display: block; font-size: 15px; }
+.dania-session-task-head small { display: block; margin-top: 3px; color: var(--ink-soft); font-size: 11px; }
+.dania-session-task-tools { display: flex; gap: 5px; }
+.dania-session-task-tools button { width: 33px; height: 33px; min-height: 0; }
+.dania-session-task-tools button:disabled { opacity: .35; cursor: default; }
+.dania-session-diagrams { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin: 15px 0 9px; }
+.dania-session-diagrams figure { min-width: 0; margin: 0; }
+.dania-session-diagrams svg { display: block; width: 100%; aspect-ratio: 5 / 4; border: 1px solid var(--line); border-radius: 9px; background: var(--panel); }
+.dania-session-diagrams figcaption { margin-top: 4px; color: var(--ink-soft); font-size: 10px; text-align: center; }
+.dania-open-diagram { width: 100%; padding: 8px 12px; border-color: var(--action); color: var(--action); background: color-mix(in srgb, var(--action) 8%, var(--bg)); }
+.dania-no-diagram { margin: 13px 0 0; padding: 10px 12px; border-radius: 9px; background: var(--panel); color: var(--ink-soft); font-size: 11px; }
+.dania-session-task .task-fields { margin-top: 14px; }
+.dania-session-modal button:focus-visible { outline: 3px solid var(--action); outline-offset: 2px; }
+.setTutorial a { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 920px) {
+  .dania-brand small, .dania-storage span { display: none; }
+}
+@media (max-width: 580px) {
+  .dania-brandbar { min-height: 41px; padding: 6px 12px; gap: 8px; flex-wrap: wrap; }
+  .dania-brand strong { font-size: 14px; }
+  .dania-brand img { width: 25px; height: 25px; }
+  .dania-brand small, .dania-storage span { display: none; }
+  .dania-storage { flex-basis: 100%; font-size: 10px; max-width: none; line-height: 1.25; text-align: left; }
+  .dania-session-open { margin-left: auto; }
+  .dania-session-modal { padding: 0; }
+  .dania-session-shell { width: 100%; height: 100dvh; border: 0; border-radius: 0; }
+  .dania-session-header { padding: 13px 14px 11px; }
+  .dania-session-header h2 { font-size: 18px; }
+  .dania-session-controls { flex-wrap: wrap; padding: 9px 12px; }
+  .dania-session-controls label { flex-basis: 100%; }
+  .dania-session-controls button { flex: 1 1 auto; }
+  .dania-session-actions { padding: 8px 12px; overflow-x: auto; justify-content: flex-start; }
+  .dania-session-actions span { display: none; }
+  .dania-session-actions button { flex: 0 0 auto; }
+  .dania-session-content { padding: 12px; }
+  .dania-session-card { padding: 14px; }
+  .dania-session-grid { grid-template-columns: 1fr; }
+  .dania-session-field.wide { grid-column: auto; }
+  .dania-session-card-title { align-items: flex-start; }
+  .dania-session-card-title > span { max-width: 92px; text-align: right; }
+  .dania-session-diagrams { grid-template-columns: 1fr; }
+  .dania-session-diagrams svg { aspect-ratio: 5 / 4; }
+}
