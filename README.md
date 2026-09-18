@@ -2,7 +2,7 @@
 
 ## Cómo abrir la pizarra para sesiones Infantil
 
-1. Abre la URL pública (GitHub Pages) o, en local: `npm run dev` con Node ≥22.13.
+1. Abre **https://danielete786-byte.github.io/dani-ia-tactica/** o, en local: `npm run dev` con Node ≥22.13.
 2. En el menú de la pizarra usa **Sesiones** para el planificador (llegada, ausencias, tareas y PDF/HTML).
 3. En **Tareas · Zona 2** elige las tareas predefinidas (2v2+2, 3v3+2, 7v7+2) para Infantil / Albolote.
 4. Todo se guarda en el navegador (modo self-host anónimo): exporta JSON/HTML si quieres copia de seguridad.
