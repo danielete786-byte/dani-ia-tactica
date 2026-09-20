@@ -230,7 +230,7 @@ function taskNotes(key: AtaqueMc23TaskKey, phase: Phase): string {
 
   return `## ${PHASES[phase]}
 
-Ataque organizado y distribución de los MC · Infantil 4ª Manolo González.
+Ataque organizado y distribución de los MC · Infantil Demo Albolote.
 
 **Montaje:** ${mounting}
 

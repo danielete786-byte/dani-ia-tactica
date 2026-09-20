@@ -273,7 +273,7 @@ function taskNotes(key: Salida3421TaskKey, phase: Phase): string {
   ][phase]
   return `## ${PHASES[phase]}
 
-Salida de balón en 3-4-2-1 · Infantil 4ª Manolo González.
+Salida de balón en 3-4-2-1 · Infantil Demo Albolote.
 
 **Montaje:** ${taskDescription}
 

@@ -280,7 +280,7 @@ function taskNotes(key: UltimoPase22TaskKey, phase: Phase): string {
 
   return `## ${PHASES[phase]}
 
-Ataque organizado, último pase y finalización · Infantil 4ª Manolo González.
+Ataque organizado, último pase y finalización · Infantil Demo Albolote.
 
 **Montaje:** ${mounting}
 
