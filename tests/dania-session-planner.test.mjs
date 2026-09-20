@@ -24,7 +24,7 @@ const read = path => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8'
 test('the authored Wednesday session carries the confirmed attendance and venue constraints', () => {
   const session = createDefaultDaniaSession();
   assert.equal(session.id, DEFAULT_SESSION_ID);
-  assert.equal(session.team, 'Infantil 4ª Manolo González');
+  assert.equal(session.team, 'Infantil Demo Albolote');
   assert.equal(session.day, 'Miércoles');
   assert.equal(session.arrivalTime, '19:45');
   assert.match(session.arrivalInstruction, /sin las botas puestas/i);
@@ -32,9 +32,9 @@ test('the authored Wednesday session carries the confirmed attendance and venue 
   assert.match(session.field, /espacio muy limitado/i);
   assert.equal(session.participants, 20);
   assert.equal(session.goalkeepers, 2);
-  assert.match(session.availableGoalkeepers, /Eric Sánchez/);
-  assert.match(session.availableGoalkeepers, /Tomás Moreno Baldacci/);
-  for (const absent of ['Adam Echanachine', 'José Luis Sevilla', 'Jad Mahmouh', 'Daniel Terrón', 'Víctor Córdoba']) {
+  assert.match(session.availableGoalkeepers, /Eric Marín Soto/);
+  assert.match(session.availableGoalkeepers, /Tomás Álvarez Rico/);
+  for (const absent of ['Adam Navarro', 'José Luis Castro', 'Jad Benali', 'Daniel Campos', 'Víctor Méndez']) {
     assert.match(session.absences, new RegExp(absent));
   }
   assert.equal(session.coachCount, 1);
@@ -79,10 +79,10 @@ test('the downloadable session includes all fields, nine diagrams and escaped co
   const session = createDefaultDaniaSession();
   session.generalNotes = '<script>alert("no")</script> & observación';
   const html = buildSessionExportHtml(session, () => '<svg viewBox="0 0 800 640"></svg>');
-  assert.match(html, /Infantil 4ª Manolo González/);
+  assert.match(html, /Infantil Demo Albolote/);
   assert.match(html, /19:45/);
   assert.match(html, /Campo chico/);
-  assert.match(html, /Eric Sánchez y Tomás Moreno Baldacci/);
+  assert.match(html, /Eric Marín Soto y Tomás Álvarez Rico/);
   assert.match(html, /Reglas \/ condicionantes|Reglas/);
   assert.equal((html.match(/<svg /g) || []).length, 9);
   assert.doesNotMatch(html, /<script>alert/);
@@ -111,11 +111,11 @@ test('the board mounts an accessible session planner with save and export action
 test('the new 90-minute session carries the 3-4-2-1 build-up plan and three keepers', () => {
   const session = createSalida3421Session();
   assert.equal(session.id, SALIDA_3421_SESSION_ID);
-  assert.equal(session.team, 'Infantil 4ª Manolo González');
+  assert.equal(session.team, 'Infantil Demo Albolote');
   assert.equal(session.durationMin, 90);
   assert.equal(session.participants, 20);
   assert.equal(session.goalkeepers, 3);
-  for (const goalkeeper of ['Eric Sánchez', 'Daniel Terrón', 'Tomás Moreno']) {
+  for (const goalkeeper of ['Eric Marín Soto', 'Daniel Campos', 'Tomás Álvarez']) {
     assert.match(session.availableGoalkeepers, new RegExp(goalkeeper));
   }
   assert.equal(sessionTaskMinutes(session), 82);
@@ -139,8 +139,8 @@ test('the current session is a 90-minute organized retreat plan for 21 players o
   assert.equal(session.durationMin, 90);
   assert.equal(session.participants, 21);
   assert.equal(session.goalkeepers, 2);
-  assert.match(session.availableGoalkeepers, /Eric Sánchez/);
-  assert.match(session.availableGoalkeepers, /Tomás Moreno Baldacci/);
+  assert.match(session.availableGoalkeepers, /Eric Marín Soto/);
+  assert.match(session.availableGoalkeepers, /Tomás Álvarez Rico/);
   assert.match(session.field, /Campo chico/);
   assert.match(session.field, /espacio muy reducido/i);
   assert.equal(session.coachCount, 1);
@@ -164,7 +164,7 @@ test('the newest session trains the last pass with 22 players, three keepers and
   assert.equal(session.durationMin, 90);
   assert.equal(session.participants, 22);
   assert.equal(session.goalkeepers, 3);
-  for (const goalkeeper of ['Eric Sánchez', 'Daniel Terrón', 'Tomás Moreno']) {
+  for (const goalkeeper of ['Eric Marín Soto', 'Daniel Campos', 'Tomás Álvarez']) {
     assert.match(session.availableGoalkeepers, new RegExp(goalkeeper));
   }
   assert.match(session.field, /Campo grande/);
@@ -193,7 +193,7 @@ test('the active session trains organized attack through the MCs with 23 players
   assert.equal(session.durationMin, 90);
   assert.equal(session.participants, 23);
   assert.equal(session.goalkeepers, 3);
-  for (const goalkeeper of ['Eric Sánchez', 'Daniel Terrón', 'Tomás Moreno']) {
+  for (const goalkeeper of ['Eric Marín Soto', 'Daniel Campos', 'Tomás Álvarez']) {
     assert.match(session.availableGoalkeepers, new RegExp(goalkeeper));
   }
   assert.match(session.field, /Campo chico/);

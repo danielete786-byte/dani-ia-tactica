@@ -265,7 +265,7 @@ function taskNotes(key: Repliegue21TaskKey, phase: Phase): string {
 
   return `## ${PHASES[phase]}
 
-Defensa organizada y repliegue colectivo · Infantil 4ª Manolo González.
+Defensa organizada y repliegue colectivo · Infantil Demo Albolote.
 
 **Montaje:** ${mounting}
 
